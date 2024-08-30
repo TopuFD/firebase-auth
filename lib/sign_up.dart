@@ -1,27 +1,40 @@
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:user_login/home_screen.dart';
+import 'package:user_login/get_token.dart';
 import 'package:user_login/widget/custom_textfield.dart';
 
 // ignore: must_be_immutable
-class SignUp extends StatelessWidget {
-  SignUp({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
 
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passController = TextEditingController();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String? sendOtp;
+
+  // create account method
   Future<User?> createAccount(
-      String name, String email, String password) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
+      BuildContext context, String name, String email, String password) async {
     try {
       User? user = (await auth.createUserWithEmailAndPassword(
               email: email, password: password))
           .user;
       if (user != null) {
-        debugPrint("Account successfull");
+        await EmailOTP.sendOTP(email: emailController.text);
+        var otp = EmailOTP.getOTP();
+        setState(() {});
+        sendOtp = otp;
         return user;
       } else {
         debugPrint("user not found");
@@ -68,17 +81,17 @@ class SignUp extends StatelessWidget {
             SizedBox(
               height: Get.height * .05,
             ),
-            Expanded(child: SizedBox()),
+            const Expanded(child: SizedBox()),
             InkWell(
               onTap: () {
                 if (nameController.text.isNotEmpty &&
                     emailController.text.isNotEmpty &&
                     passController.text.isNotEmpty) {
-                  createAccount(nameController.text, emailController.text,
-                          passController.text)
+                  createAccount(context, nameController.text,
+                          emailController.text, passController.text)
                       .then((user) {
                     if (user != null) {
-                      Get.to(HomeScreen());
+                      Get.to(OtpCodeScreen(sentOtp: sendOtp!));
                     } else {
                       debugPrint("Creat account faild");
                     }
@@ -108,3 +121,12 @@ class SignUp extends StatelessWidget {
     );
   }
 }
+
+// class EmailOTP {
+//   static Future<int?> sendOTP({required String email}) async {
+//     int generatedOTP = Random().nextInt(900000) + 100000;
+
+
+//     return generatedOTP;
+//   }
+// }

@@ -59,14 +59,14 @@ class LoginScreen extends StatelessWidget {
             RichText(
                 text: TextSpan(children: [
               const TextSpan(
-                  text: "Don\'t have any Account? ",
+                  text: "Don't have any Account? ",
                   style: TextStyle(fontSize: 18, color: Colors.black)),
               TextSpan(
                   text: "SignUp",
                   style: const TextStyle(fontSize: 18, color: Colors.green),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Get.to(SignUp());
+                      Get.to(const SignUp());
                     }),
             ])),
             SizedBox(

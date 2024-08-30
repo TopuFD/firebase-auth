@@ -66,8 +66,8 @@ class CustomTextFormField extends StatelessWidget {
             hintText: hintText,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            prefixIconColor: Color(0xFFB6F3B8),
-            suffixIconColor: Color(0xFF8A8989)),
+            prefixIconColor: const Color(0xFFB6F3B8),
+            suffixIconColor: const Color(0xFF8A8989)),
       ),
     ]);
   }

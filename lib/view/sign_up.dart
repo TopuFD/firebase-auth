@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:user_login/get_token.dart';
+import 'package:user_login/view/get_token.dart';
 import 'package:user_login/widget/custom_textfield.dart';
 
 // ignore: must_be_immutable

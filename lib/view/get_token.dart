@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:user_login/home_screen.dart';
+import 'package:user_login/view/home_screen.dart';
 
 // ignore: must_be_immutable
 class OtpCodeScreen extends StatelessWidget {
